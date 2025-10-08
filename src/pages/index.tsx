@@ -2,9 +2,15 @@ import Head from "next/head";
 
 import styles from "@/styles/Home.module.css";
 
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useLoader } from '@react-three/fiber';
+import { Environment, OrbitControls, Stage } from "@react-three/drei";
+import { LayerMaterial, Depth } from 'lamina'
+import * as THREE from 'three'
+
+import AnimatedBox from "@/components/AnimatedBox";
 
 export default function Home() {
+
   return (
     <>
       <Head>
@@ -14,14 +20,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div id="canvas-container">
+      <div id={styles.canvas_container}>
         <Canvas>
-          <ambientLight intensity={0.1} />
-          <directionalLight color="red" position={[0, 0, 5]} />
-          <mesh>
-            <boxGeometry args={[5, 5, 5]}/>
-            <meshStandardMaterial />
-          </mesh>
+          <Stage>
+            <OrbitControls />
+            <AnimatedBox size={[3, 3, 3]} color="blue" />
+          </Stage>
         </Canvas>
       </div>
     </>
